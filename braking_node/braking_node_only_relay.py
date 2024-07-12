@@ -38,10 +38,7 @@ class Braking(Node):
         set_braking_current += self.change_current_to_cmd(m4)
         set_braking_current += bytearray(b'\x7d')
         self.ser.write(set_braking_current)
-        return_data = self.ser.readline().decode('utf-8').strip()
         self.ser.write(set_braking_current)
-        return_data = self.ser.readline().decode('utf-8').strip()
-        print(return_data)
 
 
     def cmd_braking_callback(self, msg):
