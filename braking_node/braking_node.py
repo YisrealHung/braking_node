@@ -29,7 +29,7 @@ class Braking(Node):
             return bytearray(b'\x64')
         else:
             return bytearray(b'\x00')
-    
+
     def braking_action(self, m1, m2, m3, m4):
         set_braking_current = bytearray(b'\x7b')
         set_braking_current += self.change_current_to_cmd(m1)
@@ -54,7 +54,7 @@ class Braking(Node):
             m3 = 0
         if s4 == 0:
             m4 = 0
-        
+
         self.braking_action(m1, m2, m3, m4)
 
 
