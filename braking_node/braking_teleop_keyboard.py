@@ -65,7 +65,23 @@ def restoreTerminalSettings(old_settings):
 
 
 def show_information(m1, m2, m3, m4, s1, s2, s3, s4):
-    print('M1: {} ({}), M2: {} ({}), M3: {} ({}), M4: {} ({})'.format(m1, s1, m2, s2, m3, s3, m4, s4))
+    if s1 == 1:
+        s1 = "ON"
+    else:
+        s1 = "OFF"
+    if s2 == 1:
+        s2 = "ON"
+    else:
+        s2 = "OFF"
+    if s3 == 1:
+        s3 = "ON"
+    else:
+        s3 = "OFF"
+    if s4 == 1:
+        s4 = "ON"
+    else:
+        s4 = "OFF"
+    print('M1: {}% ({}), M2: {}% ({}), M3: {}% ({}), M4: {}% ({})'.format(m1, s1, m2, s2, m3, s3, m4, s4))
 
 
 def main():
@@ -76,8 +92,14 @@ def main():
     node = rclpy.create_node('braking_teleop_keyboard')
     pub = node.create_publisher(UInt16MultiArray, 'braking_control', 10)
 
-    m1 = 25, m2 = 25, m3 = 25, m4 = 25
-    s1 = 0, s2 = 0, s3 = 0, s4 = 0
+    m1 = 25
+    m2 = 25
+    m3 = 25
+    m4 = 25
+    s1 = 0
+    s2 = 0
+    s3 = 0
+    s4 = 0
     status = 0.0
 
     try:
@@ -135,13 +157,24 @@ def main():
 
                 if (status == 14):
                     print(msg)
+                    show_information(m1, m2, m3, m4, s1, s2, s3, s4)
                 status = (status + 1) % 15
 
             else:
-                m1 = 25, m2 = 25, m3 = 25, m4 = 25
-                s1 = 0, s2 = 0, s3 = 0, s4 = 0
+                m1 = 25
+                m2 = 25
+                m3 = 25
+                m4 = 25
+                s1 = 0
+                s2 = 0
+                s3 = 0
+                s4 = 0
+                show_information(m1, m2, m3, m4, s1, s2, s3, s4)
+
                 if (key == '\x03'):
-                    print("out/out/out/out/out/out/out/out/out/out/out/out/out/out/out/out")
+                    braking_control_msg = UInt16MultiArray()
+                    braking_control_msg.data = [25, 25, 25, 25, 0, 0, 0, 0]
+                    pub.publish(braking_control_msg)
                     break
 
             braking_control_msg = UInt16MultiArray()
@@ -152,8 +185,14 @@ def main():
         print(e)
 
     finally:
-        m1 = 25, m2 = 25, m3 = 25, m4 = 25
-        s1 = 0, s2 = 0, s3 = 0, s4 = 0
+        m1 = 25
+        m2 = 25
+        m3 = 25
+        m4 = 25
+        s1 = 0
+        s2 = 0
+        s3 = 0
+        s4 = 0
         braking_control_msg = UInt16MultiArray()
         braking_control_msg.data = [m1, m2, m3, m4, s1, s2, s3, s4]
         pub.publish(braking_control_msg)

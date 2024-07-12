@@ -61,7 +61,7 @@ class Braking(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = Braking(port = '/dev/ttyCH341USB0',baud = 9600)
+    node = Braking(port = '/dev/ttyUSB0',baud = 9600)
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
