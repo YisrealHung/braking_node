@@ -23,7 +23,11 @@ setup(
             'braking_node = braking_node.braking_node:main',
             'braking_node_without_relay = braking_node.braking_node_without_relay:main',
             'braking_node_only_relay = braking_node.braking_node_only_relay:main',
-            'braking_teleop_keyboard = braking_node.braking_teleop_keyboard:main'
+            'braking_teleop_keyboard = braking_node.braking_teleop_keyboard:main',
+            'single_motor_1_teleop.py = braking_node.single_motor_1_teleop:main',
+            'single_motor_2_teleop.py = braking_node.single_motor_2_teleop:main',
+            'single_motor_3_teleop.py = braking_node.single_motor_3_teleop:main',
+            'single_motor_4_teleop.py = braking_node.single_motor_4_teleop:main'
         ],
     },
 )

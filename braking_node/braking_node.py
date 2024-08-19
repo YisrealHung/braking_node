@@ -8,7 +8,7 @@ from example_interfaces.msg import UInt16MultiArray
 
 class Braking(Node):
 
-    def __init__(self, port = 'dev/braking',baud = 9600):
+    def __init__(self, port = '/dev/braking',baud = 9600):
         super().__init__('braking_node')
         self.subscription = self.create_subscription(UInt16MultiArray, 'braking_control', self.cmd_braking_callback, 10)
         self.ser = serial.Serial(port, baud, timeout = 1)
@@ -61,7 +61,7 @@ class Braking(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = Braking(port = '/dev/ttyUSB0',baud = 9600)
+    node = Braking(port = '/dev/braking',baud = 9600)
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
